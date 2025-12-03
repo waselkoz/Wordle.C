@@ -1,6 +1,6 @@
 # ALGO3 Mini Project Report: Wordle Solver
 
-**Author:** ABADLI Badreddine  
+**Author:** Wassim selama
 **Course:** Algorithms & Data Structures in C  
 **Date:** 01/12/2025
 
