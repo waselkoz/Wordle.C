@@ -1,7 +1,7 @@
 # Wordle Game & Solver in C
 
-**Author:** ABADLI Badreddine  
-**Course:** Algorithms & Data Structures in C  
+**Author:** Wassim selama
+**Course:** Algorithms & Data Structures in C
 **Date:** 01/12/2025
 
 ## Overview
