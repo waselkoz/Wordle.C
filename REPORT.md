@@ -88,16 +88,13 @@ Let $L$ be the word length ($L=5$).
 ## Example Code Snippet
 
 ```c
-// From solver.c
-// Filters the list of possible words based on the feedback received.
+
 for (int i = 0; i < word_count; i++) {
     if (possible[i]) {
-        // If the word 'word_list[i]' would NOT produce the same feedback
-        // for the given guess, it cannot be the target.
         if (is_consistent(word_list[i], current_guess, feedback)) {
             new_count++;
         } else {
-            possible[i] = false; // Eliminate this word
+            possible[i] = false;
         }
     }
 }
