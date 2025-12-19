@@ -11,7 +11,6 @@ This project implements a clone of the popular game **Wordle** in C, along with 
 
 The project consists of two main parts:
 1.  **The Game**: A CLI-based Wordle game where you can play manually.
-1.  **The Game**: A CLI-based Wordle game where you can play manually.
 2.  **The Solvers**: Two algorithms (Simple & Minimax) that play the game automatically.
 3.  **Benchmark**: A tool to compare the performance of the solvers.
 
