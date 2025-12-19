@@ -32,21 +32,17 @@ bool load_word_list(const char *filename, char ***words, int *count) {
   *words = malloc(capacity * sizeof(char *));
 
   while (fgets(buffer, sizeof(buffer), f)) {
-    // Trim newline characters
     buffer[strcspn(buffer, "\n")] = 0;
     buffer[strcspn(buffer, "\r")] = 0;
 
-    // Skip words that are not the correct length
     if (strlen(buffer) != WORD_LENGTH)
       continue;
 
-    // Resize array if needed
     if (*count >= capacity) {
       capacity *= 2;
       *words = realloc(*words, capacity * sizeof(char *));
     }
 
-    // Duplicate the string and store it
     (*words)[*count] = strdup(buffer);
     to_upper_string((*words)[*count]);
     (*count)++;

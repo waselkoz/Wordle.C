@@ -45,6 +45,9 @@ void get_feedback(const char *target, const char *guess,
                   FeedbackColor *feedback);
 
 // Solver
-void solve_game(const char *target, char **word_list, int word_count);
+int solve_game_simple(const char *target, char **word_list, int word_count,
+                      bool silent);
+int solve_game_minimax(const char *target, char **word_list, int word_count,
+                       bool silent);
 
 #endif

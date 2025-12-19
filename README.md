@@ -11,12 +11,17 @@ This project implements a clone of the popular game **Wordle** in C, along with 
 
 The project consists of two main parts:
 1.  **The Game**: A CLI-based Wordle game where you can play manually.
-2.  **The Solver**: An algorithm that plays the game automatically and attempts to find the word in the minimum number of guesses.
+1.  **The Game**: A CLI-based Wordle game where you can play manually.
+2.  **The Solvers**: Two algorithms (Simple & Minimax) that play the game automatically.
+3.  **Benchmark**: A tool to compare the performance of the solvers.
 
 ## Features
 -   **Dictionary Loading**: Reads valid 5-letter words from `words.txt`.
--   **Feedback System**: Correctly handles Green (correct pos), Yellow (wrong pos), and Gray (not in word) logic, including duplicate letters.
--   **Solver Strategy**: Uses a consistency-based filtering approach to narrow down the search space after every guess.
+-   **Feedback System**: Correctly handles Green (correct pos), Yellow (wrong pos), and Gray (not in word) logic.
+-   **Dual Solvers**:
+    -   **Simple**: Fast, consistency-based filtering.
+    -   **Minimax**: Optimized, minimizes worst-case remaining possibilities.
+-   **Benchmark Mode**: Compare average guesses and failure rates of both solvers.
 -   **Cross-Platform**: Includes Windows API support for ANSI colors in the terminal.
 
 ## How to Build and Run
@@ -44,8 +49,16 @@ Type your 5-letter guesses.
 Run the executable and select option `2`.
 You can enter a specific target word (e.g., `APPLE`) or type `RANDOM` to let the game pick one.
 ```bash
+
 .\wordle.exe
-# Select 2, then type RANDOM
+# Select 2, then enter word (or RANDOM), then choose Strategy (1=Simple, 2=Minimax)
+```
+
+**3. Benchmark Solvers**
+Run the executable and select option `3` to see which solver is better.
+```bash
+.\wordle.exe
+# Select 3, then choose subset size
 ```
 
 ## Project Structure
