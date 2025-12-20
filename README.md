@@ -10,7 +10,7 @@
 this project represents an attempt to remake the famous game wordle in C .it also propose 2 solver wich consists of : 
 simple solver : wich is a simple algorithmic thinking solver but its precise and logical
 Minmax solver:The second solver uses a Minimax / Information Theory strategy. It doesn't just try to guess the word, it tries to eliminate as many wrong words as possible.
-The Project highlight the difference between the 2 solver because they have same yet different time complexity .
+The Project highlight the difference between the 2 solver because they have same yet different time complexity ..
 
 The project consists of two main parts:
 1.  **The Game**: A CLI-based Wordle game where you can play manually.
