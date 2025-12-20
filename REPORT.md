@@ -79,3 +79,4 @@ Let $N$ be the number of words in the dictionary ($N \approx 2800$). $L=5$.
 
 **Module: `game.c`**
 *   `get_feedback(...)`: Stateless function that computes the color pattern between any two words. Used by both the real game loop and the solver's internal simulation.
+
