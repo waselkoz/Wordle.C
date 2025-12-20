@@ -5,8 +5,7 @@
 **Date:** 01/12/2025
 
 ---
-
-## Part 3: Analysis, Justification, and Code Documentation
+ Analysis, Justification, and Code Documentation
 
 ### a. Strategy Description
 
@@ -84,7 +83,7 @@ To ensure the Minimax solver runs efficiently and logically, we implemented seve
 *   **Heuristic**: If `WorstCase(Word A) == WorstCase(Word B)`, but `Word A` is a *possible answer* (in $|S|$) and `Word B` is not, we choose `Word A`.
 *   **Impact**: This allows us to potentially win on the current turn by luck, without sacrificing information gain guarantees.
 
-### d. Data Structure Justification
+### e. Data Structure Justification
 
 **1. Array of Strings (`char **word_list`)**
 *   **Usage**: Stores dictionary.
@@ -94,7 +93,7 @@ To ensure the Minimax solver runs efficiently and logically, we implemented seve
 *   **Usage**: Efficiently marks eliminated words.
 *   **Justification**: 1 byte/word is minimal overhead compared to linked list pointers (8-16 bytes).
 
-### e. Code Documentation
+### f. Code Documentation
 
 **Module: `solver.c`**
 *   `solve_game_minimax(...)`: Implements the $O(N^2)$ logic.
