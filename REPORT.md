@@ -47,19 +47,42 @@ We conducted a benchmark on **100 random words** to compare the performance.
 
 ### c. Complexity Analysis
 
-Let $N$ be the number of words in the dictionary ($N \approx 2800$). $L=5$.
+Let $N$ be the total number of words in the dictionary ($N \approx 2315$ for solutions, but our list is $\approx 2800$). Let $L$ be the word length ($5$). Let $|S|$ be the size of the set of *remaining possible words* at step $k$.
 
 **1. Simple Solver**:
-*   **Time Complexity**: $O(N)$ per guess. We scan the list once.
-    *   Total: $O(G \times N) \approx O(N)$.
-*   **Space Complexity**: $O(N)$ for the boolean array.
+*   **Time Complexity**: $O(|S| \cdot N)$ per guess.
+    *   In the worst case, we scan the entire dictionary ($N$) to find the first word consistent with history. Checking consistency takes $O(L)$.
+    *   Since we only check if words are consistent with the *current* feedback, it behaves like $O(N)$.
+*   **Space Complexity**: $O(N)$ to maintain the `possible` boolean array.
 
-**2. Minimax Solver**:
-*   **Time Complexity**: $O(N^2)$ per guess.
-    *   We iterate through every candidate guess ($N$).
-    *   Inside, we simulate feedback against every possible target ($N$).
-    *   Total operations $\approx N^2 \approx 2800^2 \approx 7.8 \times 10^6$ ops per turn. This is computationally expensive but manageable for $N < 10,000$.
-*   **Space Complexity**: $O(N)$ for bookkeeping arrays.
+**2. Minimax Solver (Entropy Maximizer)**:
+*   **Time Complexity**: $O(N \cdot |S|)$ per guess.
+    *   For **every candidate guess** ($N$), we simulate feedback against **every possible target** inside the remaining set $|S|$.
+    *   Inside the inner loop, feedback calculation is $O(L)$.
+    *   **Worst Case**: At the first guess, $|S| = N$. Thus, the first move is $O(N^2)$. With $N \approx 2800$, this is $\approx 7.8 \times 10^6$ operations, which takes a few seconds on standard hardware.
+    *   **Amortized**: As $|S|$ shrinks rapidly (typically $< 100$ after guess 1), subsequent moves are extremely fast ($O(100N)$).
+*   **Space Complexity**:
+    *   $O(N)$ for the `possible` array.
+    *   $O(3^L)$ for the frequency array (feedback buckets). Since $L=5$, $3^5 = 243$, which is constant space $O(1)$.
+
+### d. Optimizations & Heuristics
+
+To ensure the Minimax solver runs efficiently and logically, we implemented several "extra" features:
+
+**1. Hardcoded First Guess ($O(1)$ Start)**
+*   **Problem**: The first move is the most expensive ($O(N^2)$).
+*   **Solution**: We pre-calculated the best opener. The solver checks if "RAISE" (or "ROATE"/"TRACE" depending on the version) is valid and uses it immediately.
+*   **Benefit**: This skips the 3-5 second initial generic computation, making the solver feel instant.
+
+**2. Base-3 Feedback Encoding**
+*   **Logic**: Instead of using a hash map to store feedback counts (e.g., "Green-Gray-Yellow..."), we map each pattern to a unique integer where Gray=0, Yellow=1, Green=2.
+*   **Formula**: $Index = \sum_{i=0}^{4} Color[i] \times 3^i$.
+*   **Benefit**: Allows us to use a simple, fast static array `int counts[243]` instead of dynamic data structures, significantly speeding up the inner loop.
+
+**3. "Soft-Win" Tie-Breaker**
+*   **Scenario**: often, multiple words provide the exact same "worst-case entropy reduction."
+*   **Heuristic**: If `WorstCase(Word A) == WorstCase(Word B)`, but `Word A` is a *possible answer* (in $|S|$) and `Word B` is not, we choose `Word A`.
+*   **Impact**: This allows us to potentially win on the current turn by luck, without sacrificing information gain guarantees.
 
 ### d. Data Structure Justification
 
