@@ -102,3 +102,4 @@ To ensure the Minimax solver runs efficiently and logically, we implemented seve
 
 **Module: `game.c`**
 *   `get_feedback(...)`: Stateless function that computes the color pattern between any two words. Used by both the real game loop and the solver's internal simulation.
+
